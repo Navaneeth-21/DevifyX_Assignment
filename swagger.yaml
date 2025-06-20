@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: GDPR Data Export API
+  version: 1.0.0
+paths:
+  /auth/register:
+    post:
+      summary: Register a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: { type: string }
+                password: { type: string }
+      responses:
+        '201': { description: User registered }
+  /auth/login:
+    post:
+      summary: Login user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email: { type: string }
+                password: { type: string }
+      responses:
+        '200': { description: JWT token }
+  /export/request:
+    post:
+      summary: Request data export
+      security:
+        - bearerAuth: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                excludedCategories: { type: array, items: { type: string } }
+      responses:
+        '201': { description: Export request submitted }
+  /export/download/{requestId}:
+    get:
+      summary: Download exported data
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: requestId
+          in: path
+          required: true
+          schema: { type: string }
+      responses:
+        '200': { description: Downloadable ZIP file }
+  /admin/exports:
+    get:
+      summary: View all export requests (admin)
+      security:
+        - bearerAuth: []
+      responses:
+        '200': { description: List of export requests }
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
