@@ -3,7 +3,7 @@ const logger = require('../utils/logger');
 
 const exportQueue = new Bull('export-queue', process.env.REDIS_URL, {
   defaultJobOptions: {
-    attempts: 3, // Retry failed jobs up to 3 times
+    attempts: 3, 
     backoff: { type: 'exponential', delay: 1000 }, // Exponential backoff
   },
 });
