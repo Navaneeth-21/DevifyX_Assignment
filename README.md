@@ -7,7 +7,6 @@ A secure, scalable Node.js backend API for GDPR-compliant user data exports.
 1. Clone the repository:
    ```bash
    git clone <repository-url>
-   cd gdpr-data-export-api
    
 ---
 
@@ -28,7 +27,7 @@ A secure, scalable Node.js backend API for GDPR-compliant user data exports.
 
 ### Security Measures
 - JWT for secure authentication
-- Role-based access control (admin vs. user)
+- Role-based access control (admin vs user)
 - Rate limiting on export requests
 - Secure password storage with bcrypt
 - Environment variables for sensitive data
@@ -59,10 +58,8 @@ A secure, scalable Node.js backend API for GDPR-compliant user data exports.
 ---
 
 ### Submission Notes
-- **Repository**: Host the code in a private GitHub repository and grant access to reviewers.
-- **Form Submission**: Use the provided Google Form (https://forms.gle/LAvLWFmHRLXswwsx5).
 - **Documentation**: Include Swagger YAML and Postman collection.
-- **Tests**: Ensure tests cover core functionality.
-- **Environment**: Provide `.env.example` for easy setup.
+- **Tests**: Ensured tests cover core functionality.
+- **Environment**: Provide `.env` for easy setup.
 
-This implementation meets all core requirements, includes several bonus features, and follows best practices for security, scalability, and maintainability. Let me know if you need further clarification or additional details!
+This implementation meets all core requirements, includes several bonus features, and follows best practices for security, scalability, and maintainability.
