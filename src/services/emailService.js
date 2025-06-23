@@ -10,17 +10,28 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-exports.sendExportReadyEmail = async (userId, requestId) => {
-  try {
-    const user = await User.findById(userId);
-    await transporter.sendMail({
-      from: 'no-reply@yourapp.com',
-      to: user.email,
-      subject: 'Your Data Export is Ready',
-      text: `Your data export is ready. Download it here: ${process.env.APP_URL}/export/download/${requestId}`,
-    });
-    logger.info('Email sent', { userId, requestId });
-  } catch (error) {
-    logger.error('Email error', { error });
-  }
+module.exports = {
+  sendExportReadyEmail: async (email, requestId) => {
+    try {
+      logger.info('Attempting to send export email', { email, requestId });
+      const info = await transporter.sendMail({
+        from: '21951a05b4@iare.ac.in',
+        to: email,
+        subject: 'Your Data Export is Ready',
+        text: `Download your data: ${process.env.APP_URL}/export/download/${requestId}`,
+      });
+      logger.info('Export email sent', { email, requestId, messageId: info.messageId });
+    } catch (error) {
+      logger.error('Email sending error', {
+        error: {
+          message: error.message,
+          code: error.code,
+          stack: error.stack,
+        },
+        email,
+        requestId,
+      });
+      throw error;
+    }
+  },
 };
